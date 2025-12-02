@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'jenkins-agent' } // match your agent node label
+  agent { label 'jenkinsagent' } // match your agent node label
 
   environment {
     IMAGE = "tiny-flask-app:${env.BUILD_NUMBER}"
@@ -19,6 +19,17 @@ pipeline {
           sh "docker build -t ${IMAGE} ."
         }
       }
+    }
+
+    stage('Push to DockerHub'){
+        steps{
+            withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubpass",usernameVariable:"dockerhubuser")]){
+                sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}"
+                sh "docker image tag tiny-flask-app:${env.BUILD_NUMBER} ${env.dockerhubuser}/tiny-flask-app:${env.BUILD_NUMBER}"
+                sh "docker push ${env.dockerhubuser}/tiny-flask-app:${env.BUILD_NUMBER}"
+            }
+            echo "Docker Push Complete"
+        }
     }
 
     stage('Run Container') {
