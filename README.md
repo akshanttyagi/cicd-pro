@@ -1,4 +1,2 @@
-# testrepo
-First testing repository 
-
-FIrst initial commit to firsasasdt testing branch1
+# cicd-pro
+This is cicd project repo
