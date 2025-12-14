@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello, This app is being run by Jenkins and using jenkins agent as container and creating this app container"
+    return "Hello, This app is being run by Jenkins. "
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
