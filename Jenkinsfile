@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'jenkinsagent' } // match your agent node label
+  agent { label 'gcpagent' } // match your agent node label
 
   environment {
     IMAGE = "tiny-flask-app:${env.BUILD_NUMBER}"
